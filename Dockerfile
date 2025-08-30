@@ -1,9 +1,13 @@
-FROM node
-WORKDIR /app
+FROM eclipse-temurin:17-jdk-alpine
+    
+EXPOSE 8080
 
-COPY . .
-EXPOSE 3000
+RUN ls 
 
-COPY package*.json ./
+ENV APP_HOME /usr/src/app
 
-ENTRYPOINT start npm
+COPY app/*.jar $APP_HOME/app.jar
+
+WORKDIR $APP_HOME
+
+CMD ["java", "-jar", "app.jar"]
